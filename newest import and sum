@@ -1,0 +1,124 @@
+void save() 
+ { 
+FILE *fp; 
+int i,a; 
+char c; 
+system("cls"); 
+printf("1、储存\n"); 
+printf("2、另存为\n"); 
+printf("0、返回\n"); 
+printf("请选择："); 
+scanf("%d",&a); 
+if(a==1) 
+{ 
+if((fp=fopen(file,"wb"))==NULL) 
+{ 
+printf("cannot open file\n"); 
+} 
+if(fwrite(&S,sizeof(int),1,fp)!=1) 
+{ 
+printf("写入文件错误！\n"); 
+} 
+for(i=0;i<S;i++) 
+{ 
+if(fwrite(&food[i],sizeof(struct data),1,fp)!=1) 
+{ 
+printf("写入文件错误！\n"); 
+} 
+} 
+fclose(fp); 
+printf("保存成功！\n\n"); 
+printf("按回车键返回！"); 
+c=getchar(); 
+c=getchar(); 
+} 
+else if(a==2) 
+{ 
+printf("\n文件名："); 
+scanf("%s",file); 
+if((fp=fopen(file,"wb"))==NULL) 
+{ 
+printf("cannot open file\n"); 
+} 
+if(fwrite(&S,sizeof(int),1,fp)!=1) 
+{ 
+printf("写入文件错误！\n"); 
+} 
+for(i=0;i<S;i++) 
+{ 
+if(fwrite(&food[i],sizeof(struct data),1,fp)!=1) 
+{ 
+printf("写入文件错误！\n"); 
+} 
+} 
+fclose(fp); 
+printf("保存成功！\n\n"); 
+printf("按回车键返回！"); 
+c=getchar(); 
+c=getchar(); 
+} 
+ }
+ void tongji()
+{
+ int qqq=0;
+ system("CLS");
+ printf("输入你统计的功能：\n");
+ printf("1 ：库元器件的总价值\n");
+ printf("2 :每月出库元件的总价值\n");
+ printf("3 :各类元件的消耗量\n");
+ scanf("%d",&qqq);
+ printf("\n");
+ printf("\n");
+ if(qqq==1)
+ {float zongjiazhi=0;
+ for(int i=0;i<S;i++)zongjiazhi+=food[i].amount*food[i].price;
+ printf("总价值为%.2f\n",zongjiazhi);
+ printf("按回车键返回！");
+ getchar();
+ getchar();
+ }
+ else if(qqq==2)
+ {
+ 
+ printf("\n");
+ float zongjiazhi=0;
+ for(int i=0;i<S;i++)
+ { int shuliang=0;
+ printf("请输上个月%s物品的数量：",food[i].name);
+ scanf("%d",&shuliang);
+ 
+ zongjiazhi+=shuliang*food[i].price;
+ }
+ for(int i=0;i<S;i++)zongjiazhi-=food[i].amount*food[i].price;
+ printf("\n");
+ printf("出库元器件的总价值%.2f\n",zongjiazhi);
+ printf("按回车键返回！");
+ getchar();
+ getchar();
+ }
+ else if(qqq==3)
+ {
+ printf("请输入上个月各类元器件的库数量：\n");
+ printf("\n");
+ int xiaohaoliang[100];
+ for(int i=0;i<S;i++)
+ { int shuliang=0;
+ printf("请输入%s物品的数量：",food[i].name);
+ scanf("%d",&shuliang);
+ 
+ shuliang-=food[i].num;
+ xiaohaoliang[i]=shuliang;
+ 
+ }
+ printf("\n");printf("\n");printf("\n");printf("\n");
+ for(int i=0;i<S;i++)
+ {
+ printf("%s消耗量为%d\n",food[i].name,xiaohaoliang[i]);
+ }
+ printf("\n");
+ printf("按回车键返回！");
+ getchar();
+ getchar();
+ 
+ }
+}
