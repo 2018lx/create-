@@ -123,6 +123,4 @@ c=getchar();
  }
 }
 
-int main() 
- { 
-int a; 
+
